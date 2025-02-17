@@ -14,8 +14,8 @@ function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
 
-  // Hide header on login page
-  if (location.pathname === "/") {
+  // Ascundem header-ul pe pagina de login
+  if (location.pathname === "/login") {
     return null;
   }
 
@@ -75,7 +75,6 @@ function Header() {
           <FaTimes />
         </button>
 
-        {/* Titlul "NAVIGATION" și linia sub el */}
         <h3 className="sidebar-title">NAVIGATION</h3>
 
         <nav className="nav">

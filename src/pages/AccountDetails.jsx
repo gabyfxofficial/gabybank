@@ -19,6 +19,14 @@ function AccountDetails() {
     );
   }
 
+  const handleBack = () => {
+    if (window.history.state && window.history.state.idx > 0) {
+      navigate(-1);
+    } else {
+      navigate("/home");
+    }
+  };
+
   return (
     <section className="account-details-container">
       <div className="account-details-card">
@@ -53,10 +61,7 @@ function AccountDetails() {
           <span className="account-details-label">Birth Date:</span>
           <span className="account-details-value">{userData.birthDate}</span>
         </div>
-        <button
-          onClick={() => navigate(-1)}
-          className="account-details-back-button"
-        >
+        <button onClick={handleBack} className="account-details-back-button">
           Back
         </button>
       </div>

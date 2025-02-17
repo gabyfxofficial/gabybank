@@ -138,7 +138,6 @@ function Deposit() {
         <select className="form-input">
           <option value="applepay">Apple Pay</option>
           <option value="googlepay">Google Pay</option>
-          {/* Samsung Pay removed as per request */}
         </select>
       </div>
       <div className="form-group">

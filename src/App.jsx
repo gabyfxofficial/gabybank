@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import {
-  BrowserRouter as Router,
+  HashRouter as Router, // folosim HashRouter pentru GitHub Pages
   Routes,
   Route,
   Navigate,

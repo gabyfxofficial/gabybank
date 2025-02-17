@@ -5,6 +5,14 @@ import "../styles/helpsupport.css";
 function HelpSupport() {
   const navigate = useNavigate();
 
+  const handleBack = () => {
+    if (window.history.state && window.history.state.idx > 0) {
+      navigate(-1);
+    } else {
+      navigate("/home");
+    }
+  };
+
   return (
     <section className="help-container">
       <div className="help-card">
@@ -39,7 +47,7 @@ function HelpSupport() {
           </section>
         </main>
         <footer className="help-footer">
-          <button className="help-back-button" onClick={() => navigate(-1)}>
+          <button className="help-back-button" onClick={handleBack}>
             Back
           </button>
         </footer>

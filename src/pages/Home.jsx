@@ -5,7 +5,6 @@ import "../styles/home.css";
 function Home() {
   const [balance] = useState(5000.0);
 
-  // Funcție pentru scroll la top
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -48,7 +47,6 @@ function Home() {
               <span className="overview-value">1 USD = 0.93 EUR</span>
             </div>
           </div>
-          {/* Butonul redirecționează spre ruta "/deposit" și face scroll la top */}
           <Link to="/deposit" className="overview-button" onClick={scrollToTop}>
             Deposit Funds
           </Link>
@@ -57,7 +55,6 @@ function Home() {
 
       <div className="separator"></div>
 
-      {/* Summary Section - Totals displayed horizontally */}
       <div className="totals-section">
         <h2 className="totals-heading">Summary - Last 7 Days</h2>
         <div className="totals-grid">
@@ -78,7 +75,6 @@ function Home() {
 
       <div className="separator"></div>
 
-      {/* Weekly Transactions Section */}
       <div className="transactions-section">
         <h2 className="transactions-heading">Weekly Transactions</h2>
         <table className="transactions-table">

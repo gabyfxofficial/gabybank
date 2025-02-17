@@ -43,7 +43,6 @@ function Login() {
           city: user.address?.city || "N/A",
           birthDate: user.birthDate,
         };
-        // Actualizăm contextul cu token-ul și datele utilizatorului
         login("mockToken123", userData, trimmedUsername);
         navigate("/home");
       } else {

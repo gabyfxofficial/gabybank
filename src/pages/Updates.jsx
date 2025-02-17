@@ -5,6 +5,14 @@ import "../styles/updates.css";
 function Updates() {
   const navigate = useNavigate();
 
+  const handleBack = () => {
+    if (window.history.state && window.history.state.idx > 0) {
+      navigate(-1);
+    } else {
+      navigate("/home");
+    }
+  };
+
   return (
     <section className="updates-container">
       <div className="updates-card">
@@ -35,7 +43,7 @@ function Updates() {
           </div>
         </main>
         <footer className="updates-footer">
-          <button className="updates-back-button" onClick={() => navigate(-1)}>
+          <button className="updates-back-button" onClick={handleBack}>
             Back
           </button>
         </footer>

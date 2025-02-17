@@ -12,7 +12,6 @@ function Transfer() {
     reason: "",
   });
 
-  // Preluăm utilizatorii din dummyjson și filtrăm utilizatorul logat
   useEffect(() => {
     async function fetchUsers() {
       try {
@@ -21,7 +20,6 @@ function Transfer() {
         const username = localStorage.getItem("username");
         const logged = data.users.find((u) => u.username === username);
         setLoggedUser(logged);
-        // Excludem utilizatorul logat din lista destinatarilor
         const filtered = data.users.filter((u) => u.username !== username);
         setUsers(filtered);
       } catch (error) {
@@ -37,13 +35,11 @@ function Transfer() {
 
   const handleTabChange = (e) => {
     setActiveTab(e.target.value);
-    // Resetăm câmpul recipient atunci când se schimbă metoda
     setFormData({ ...formData, recipient: "", fullName: "" });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Logica de transfer poate fi extinsă aici
     console.log("Transfer Data:", { method: activeTab, ...formData });
     alert("Transfer initiated! Check console for details.");
   };
@@ -86,7 +82,6 @@ function Transfer() {
             </div>
           ) : activeTab === "IBAN" ? (
             <>
-              {/* Secțiune pentru nume complet */}
               <div className="form-group">
                 <label className="form-label">Full Name</label>
                 <input

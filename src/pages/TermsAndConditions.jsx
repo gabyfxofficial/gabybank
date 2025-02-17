@@ -5,6 +5,14 @@ import "../styles/terms.css";
 function TermsAndConditions() {
   const navigate = useNavigate();
 
+  const handleBack = () => {
+    if (window.history.state && window.history.state.idx > 0) {
+      navigate(-1);
+    } else {
+      navigate("/home");
+    }
+  };
+
   return (
     <section className="terms-container">
       <div className="terms-card">
@@ -74,7 +82,7 @@ function TermsAndConditions() {
           </section>
         </main>
         <footer className="terms-footer">
-          <button className="terms-back-button" onClick={() => navigate(-1)}>
+          <button className="terms-back-button" onClick={handleBack}>
             Back
           </button>
         </footer>
