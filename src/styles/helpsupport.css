@@ -1,0 +1,149 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap");
+
+/* Keyframes for fade-in effect */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.help-container {
+  background: linear-gradient(135deg, #0d2538, #1b3a5a);
+  min-height: 100vh;
+  padding: 40px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.help-card {
+  background: rgba(0, 0, 0, 0.75);
+  padding: 30px;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 800px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  color: #ffffff;
+  font-family: "Montserrat", sans-serif;
+  display: flex;
+  flex-direction: column;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.help-header {
+  text-align: center;
+  margin-bottom: 20px;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.help-title {
+  font-size: 2rem;
+  margin: 0;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.help-main {
+  flex: 1;
+  font-size: 1rem;
+  line-height: 1.6;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.help-section {
+  margin-bottom: 20px;
+}
+
+.help-section-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.help-item {
+  margin-bottom: 15px;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.help-question {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.help-answer {
+  font-size: 0.95rem;
+  word-break: break-word;
+}
+
+.help-contact {
+  font-size: 1rem;
+  word-break: break-word;
+}
+
+.help-footer {
+  margin-top: 20px;
+  text-align: center;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.help-back-button {
+  width: 100%;
+  padding: 12px;
+  background-color: #3498db;
+  border: none;
+  border-radius: 5px;
+  color: #ffffff;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 300ms ease;
+}
+
+.help-back-button:hover {
+  background-color: #2980b9;
+}
+
+/* Responsive adjustments for tablets and smaller devices */
+@media (max-width: 768px) {
+  .help-card {
+    padding: 25px;
+    max-width: 90%;
+  }
+  .help-title {
+    font-size: 1.8rem;
+  }
+  .help-main {
+    font-size: 0.95rem;
+  }
+  .help-section-title {
+    font-size: 1.1rem;
+  }
+  .help-back-button {
+    font-size: 0.95rem;
+    padding: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .help-container {
+    padding-top: 120px;
+  }
+  .help-card {
+    padding: 20px;
+    max-width: 95%;
+  }
+  .help-title {
+    font-size: 1.6rem;
+  }
+  .help-main {
+    font-size: 0.9rem;
+  }
+  .help-back-button {
+    font-size: 0.9rem;
+    padding: 10px;
+  }
+}

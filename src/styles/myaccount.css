@@ -1,0 +1,150 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap");
+
+.account-container {
+  background: linear-gradient(135deg, #0d2538, #1b3a5a);
+  min-height: 100vh;
+  padding: 60px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.account-card {
+  background: rgba(0, 0, 0, 0.85);
+  padding: 45px 40px;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+  color: #fff;
+  font-family: "Montserrat", sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Optional glassmorphism effect */
+.account-card::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: rgba(255, 255, 255, 0.03);
+  transform: rotate(45deg);
+  pointer-events: none;
+}
+
+.account-title {
+  font-size: 2.2rem;
+  margin-bottom: 35px;
+  text-align: center;
+  z-index: 1;
+}
+
+/* Hub container for navigation buttons */
+.account-hub {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  margin-bottom: 35px;
+  z-index: 1;
+}
+
+/* Modern animated button style */
+.nav-button {
+  display: block;
+  width: 100%;
+  padding: 16px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(45deg, #00c6ff, #0072ff);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+}
+
+.nav-button::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.15);
+  transition: left 0.3s ease;
+  z-index: -1;
+}
+
+.nav-button:hover::after {
+  left: 0;
+}
+
+.nav-button:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 20px rgba(0, 114, 255, 0.4);
+}
+
+/* Logout button style with contrasting gradient */
+.logout-button {
+  display: block;
+  width: 100%;
+  padding: 16px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(45deg, #ff416c, #ff4b2b);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  z-index: 1;
+}
+
+.logout-button:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 20px rgba(255, 75, 43, 0.4);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .account-card {
+    padding: 35px 25px;
+    max-width: 90%;
+  }
+  .account-title {
+    font-size: 1.9rem;
+    margin-bottom: 30px;
+  }
+  .nav-button,
+  .logout-button {
+    padding: 14px;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .account-card {
+    padding: 30px 20px;
+    max-width: 95%;
+  }
+  .account-title {
+    font-size: 1.7rem;
+    margin-bottom: 25px;
+  }
+  .nav-button,
+  .logout-button {
+    padding: 12px;
+    font-size: 0.9rem;
+  }
+}

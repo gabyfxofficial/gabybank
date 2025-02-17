@@ -1,0 +1,374 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap");
+
+:root {
+  --color-card-background: rgba(39, 39, 39, 0.75);
+  --color-card-shade: rgba(57, 57, 57, 0.75);
+  --color-card-light-gray: rgba(255, 255, 255, 0.6);
+}
+
+.base-template__wrapper {
+  max-width: 1560px;
+  margin: 0 auto;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.base-template__content {
+  width: 100%;
+  text-align: center;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Modificat: Conținutul nu mai este centrat vertical, ci începe de sus */
+.base-template {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background: linear-gradient(135deg, #0d2538, #1b3a5a);
+  min-height: 100vh;
+  padding: 20px;
+  padding-top: 125px;
+  animation: fadeScale 1.2s forwards;
+}
+
+.cards-title {
+  text-align: center;
+  font-family: "Poppins", sans-serif;
+  font-size: 2rem;
+  margin-bottom: 30px;
+  color: #ffffff;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  animation: fadeScale 1s forwards;
+}
+
+.bank-cards {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 50px 5.2vw;
+  z-index: 1;
+  animation: fadeScale 1s forwards;
+}
+
+@media screen and (max-width: 1440px) {
+  .bank-cards {
+    gap: 40px 4vw;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .bank-cards {
+    gap: 30px 3vw;
+  }
+  .base-template__wrapper {
+    padding-top: 5px;
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .bank-cards {
+    width: 90%;
+    margin: 0 auto;
+    transform: none;
+  }
+  .bank-cards-item {
+    width: 280px;
+    aspect-ratio: 280 / 180;
+    font-size: 13px;
+  }
+  .bank-cards-item__number {
+    font-size: 20px;
+    letter-spacing: 1px;
+    justify-content: space-around;
+  }
+  .bank-cards-item__inner {
+    padding: 15px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+  .bank-cards-item__description {
+    position: relative;
+    z-index: 2;
+    font-size: 9px;
+    line-height: 1.3;
+    text-align: center;
+    margin-top: -12px;
+  }
+  .bank-cards-item__side.back::after {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 0;
+    bottom: 12px;
+    width: 100%;
+    height: 30px;
+    background-color: black;
+    z-index: 0;
+  }
+  .bank-cards-item__secure {
+    margin: 0 auto 15px;
+  }
+  .base-template {
+    padding: 10px;
+    padding-top: 100px;
+  }
+  .wrapper,
+  .base-template__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.bank-cards-item {
+  position: relative;
+  width: 415px;
+  aspect-ratio: 415 / 260;
+  border-radius: 20px;
+  font-size: 16px;
+  font-weight: 400;
+  color: white;
+  line-height: 1.25;
+  perspective: calc(415px * 5);
+  transform-style: preserve-3d;
+  animation: smooth-tilt 6s infinite linear, fadeScale 1s forwards;
+  outline: none;
+  cursor: default;
+  transition: filter 0.4s ease;
+}
+
+.bank-cards-item.clicked {
+  filter: brightness(1.25);
+}
+
+.bank-cards-item__side {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    var(--color-card-shade),
+    var(--color-card-background)
+  );
+  border-radius: 20px;
+  backface-visibility: hidden;
+  backdrop-filter: blur(150px);
+  overflow: hidden;
+  transition: transform 0.8s ease-in-out;
+  will-change: transform;
+}
+
+.bank-cards-item__inner {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 30px;
+}
+
+.bank-cards-item__nfc-symbol {
+  width: 79px;
+}
+
+.bank-cards-item__provider {
+  width: 39px;
+}
+
+.bank-cards-item__nfc-symbol img,
+.bank-cards-item__provider img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.bank-cards-item__details {
+  margin: auto 0 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  z-index: 2;
+}
+
+.bank-cards-item__cardholder {
+  display: flex;
+  flex-direction: column;
+  row-gap: 2px;
+}
+
+.bank-cards-item__label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-card-light-gray);
+  text-transform: uppercase;
+}
+
+.bank-cards-item__name {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.bank-cards-item__figure {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 190px;
+  aspect-ratio: 1;
+  overflow: hidden;
+}
+
+.bank-cards-item__figure svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.bank-cards-item__side.back::after {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0;
+  bottom: 25px;
+  width: 100%;
+  height: 50px;
+  background-color: black;
+}
+
+.bank-cards-item__number {
+  margin: 0 0 35px;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  font-size: 28px;
+  letter-spacing: 2px;
+}
+
+.bank-cards-item__secure {
+  margin: 0 auto 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  max-width: 224px;
+  letter-spacing: 2px;
+}
+
+.bank-cards-item__description {
+  font-size: 8px;
+}
+
+.bank-cards-item__side.back {
+  transform: rotateY(180deg);
+}
+
+.bank-cards-item:hover .bank-cards-item__side.front {
+  transform: rotateY(-180deg);
+}
+
+.bank-cards-item:hover .bank-cards-item__side.back {
+  transform: rotateY(0);
+}
+
+.bank-cards-item__hint {
+  position: absolute;
+  top: -68px;
+  left: calc(50% - 220px / 2);
+  width: 220px;
+  height: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 8px;
+  background: url("https://bato-web-agency.github.io/bato-shared/img/bank-cards/hint.svg");
+  background-size: 100% 100%;
+  border-radius: 10px;
+  opacity: 0;
+  transform: translateY(100%);
+}
+
+@keyframes hint {
+  0% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+}
+
+.bank-cards-item__hint.shown {
+  animation: hint 1.6s ease-in-out forwards;
+}
+
+@keyframes smooth-tilt {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(1deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.copy-btn {
+  background: none;
+  border: none;
+  color: #4ea8de;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-left: 5px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0;
+}
+
+.copy-btn:hover {
+  color: #06ff5e;
+}
+
+.copy-btn--card-number {
+  margin-left: -10px;
+}
+
+@media screen and (min-width: 576px) {
+  .copy-btn--card-number {
+    margin-right: 50px;
+    margin-left: unset;
+  }
+}

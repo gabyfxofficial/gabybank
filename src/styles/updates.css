@@ -1,0 +1,133 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap");
+
+/* Keyframes for fade-in effect */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.updates-container {
+  background: linear-gradient(135deg, #0d2538, #1b3a5a);
+  min-height: 100vh;
+  padding: 40px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.updates-card {
+  background: rgba(0, 0, 0, 0.75);
+  padding: 30px;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 800px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  color: #ffffff;
+  font-family: "Montserrat", sans-serif;
+  display: flex;
+  flex-direction: column;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.updates-header {
+  text-align: center;
+  margin-bottom: 20px;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.updates-title {
+  font-size: 2rem;
+  margin: 0;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.updates-main {
+  flex: 1;
+  font-size: 1rem;
+  line-height: 1.6;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.update-item {
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  animation: fadeIn 1s ease-in-out;
+}
+
+.update-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.update-description {
+  font-size: 1rem;
+  word-break: break-word;
+}
+
+.updates-footer {
+  margin-top: 20px;
+  text-align: center;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.updates-back-button {
+  width: 100%;
+  padding: 12px;
+  background-color: #3498db;
+  border: none;
+  border-radius: 5px;
+  color: #ffffff;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 300ms ease;
+}
+
+.updates-back-button:hover {
+  background-color: #2980b9;
+}
+
+/* Responsive adjustments for tablets and smaller devices */
+@media (max-width: 768px) {
+  .updates-card {
+    padding: 25px;
+    max-width: 90%;
+  }
+  .updates-title {
+    font-size: 1.8rem;
+  }
+  .updates-main {
+    font-size: 0.95rem;
+  }
+  .updates-back-button {
+    font-size: 0.95rem;
+    padding: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .updates-container {
+    padding-top: 160px;
+  }
+  .updates-card {
+    padding: 20px;
+    max-width: 95%;
+  }
+  .updates-title {
+    font-size: 1.6rem;
+  }
+  .updates-main {
+    font-size: 0.9rem;
+  }
+  .updates-back-button {
+    font-size: 0.9rem;
+    padding: 10px;
+  }
+}
