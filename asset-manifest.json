@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/gabybank/static/css/main.d37a7160.css",
+    "main.js": "/gabybank/static/js/main.8d8009ff.js",
+    "index.html": "/gabybank/index.html",
+    "main.d37a7160.css.map": "/gabybank/static/css/main.d37a7160.css.map",
+    "main.8d8009ff.js.map": "/gabybank/static/js/main.8d8009ff.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d37a7160.css",
+    "static/js/main.8d8009ff.js"
+  ]
+}
