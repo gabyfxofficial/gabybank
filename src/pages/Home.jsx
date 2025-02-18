@@ -1,3 +1,4 @@
+// Home.jsx
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
@@ -15,6 +16,7 @@ function Home() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  // Filtrăm tranzacțiile pentru a afișa doar cele de tip "Transfer" și "Deposit"
   const filteredTransactions = transactions.filter(
     (tx) => tx.type === "Transfer" || tx.type === "Deposit"
   );
@@ -24,6 +26,7 @@ function Home() {
 
   return (
     <div className="home-container">
+      {/* Account Overview Section */}
       <div className="overview-section">
         <div className="overview-card">
           <h2 className="overview-title">Account Overview</h2>
@@ -61,6 +64,7 @@ function Home() {
 
       <div className="separator"></div>
 
+      {/* Transactions Section */}
       <div className="transactions-section">
         <h2 className="transactions-title">My Transactions</h2>
         {filteredTransactions.length > 0 ? (
