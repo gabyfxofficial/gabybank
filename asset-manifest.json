@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/gabybank/static/css/main.d37a7160.css",
-    "main.js": "/gabybank/static/js/main.ff5c8419.js",
+    "main.css": "/gabybank/static/css/main.fff41b9c.css",
+    "main.js": "/gabybank/static/js/main.0b8bd874.js",
     "index.html": "/gabybank/index.html",
-    "main.d37a7160.css.map": "/gabybank/static/css/main.d37a7160.css.map",
-    "main.ff5c8419.js.map": "/gabybank/static/js/main.ff5c8419.js.map"
+    "main.fff41b9c.css.map": "/gabybank/static/css/main.fff41b9c.css.map",
+    "main.0b8bd874.js.map": "/gabybank/static/js/main.0b8bd874.js.map"
   },
   "entrypoints": [
-    "static/css/main.d37a7160.css",
-    "static/js/main.ff5c8419.js"
+    "static/css/main.fff41b9c.css",
+    "static/js/main.0b8bd874.js"
   ]
 }
