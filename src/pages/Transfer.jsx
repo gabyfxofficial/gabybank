@@ -1,4 +1,12 @@
+// Transfer.jsx
 import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  withdrawFiat,
+  withdrawBtc,
+  withdrawEth,
+  addTransaction,
+} from "../redux/store";
 import "../styles/transfer.css";
 
 function Transfer() {
@@ -11,6 +19,11 @@ function Transfer() {
     amount: "",
     reason: "",
   });
+
+  const dispatch = useDispatch();
+  const fiatBalance = useSelector((state) => state.fiat);
+  const btcBalance = useSelector((state) => state.btc);
+  const ethBalance = useSelector((state) => state.eth);
 
   useEffect(() => {
     async function fetchUsers() {
@@ -40,8 +53,71 @@ function Transfer() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const amount = parseFloat(formData.amount);
+    if (isNaN(amount) || amount <= 0) {
+      alert("Please enter a valid amount");
+      return;
+    }
+    const currentDate = new Date().toLocaleDateString();
+
+    // Verificăm soldul și efectuăm retragerea în funcție de metodă
+    if (activeTab === "BTC") {
+      if (amount > btcBalance) {
+        alert("Insufficient BTC balance for this transfer.");
+        return;
+      }
+      dispatch(withdrawBtc(amount));
+    } else if (activeTab === "ETH") {
+      if (amount > ethBalance) {
+        alert("Insufficient ETH balance for this transfer.");
+        return;
+      }
+      dispatch(withdrawEth(amount));
+    } else {
+      // Pentru IBAN, User și Phone se presupune transfer fiat
+      if (amount > fiatBalance) {
+        alert("Insufficient fiat balance for this transfer.");
+        return;
+      }
+      dispatch(withdrawFiat(amount));
+    }
+
+    // Determinăm descrierea metodei în funcție de activeTab
+    let methodDescription = "";
+    switch (activeTab) {
+      case "IBAN":
+        methodDescription = "IBAN";
+        break;
+      case "User":
+        methodDescription = "Friends";
+        break;
+      case "Phone":
+        methodDescription = "Phone Number";
+        break;
+      case "BTC":
+        methodDescription = "BTC Address";
+        break;
+      case "ETH":
+        methodDescription = "ETH Address";
+        break;
+      default:
+        methodDescription = activeTab;
+    }
+
+    // Adăugăm tranzacția în store, inclusiv metoda utilizată
+    dispatch(
+      addTransaction({
+        id: Date.now(),
+        type: "Transfer",
+        amount: amount,
+        date: currentDate,
+        method: methodDescription,
+      })
+    );
+
     console.log("Transfer Data:", { method: activeTab, ...formData });
     alert("Transfer initiated! Check console for details.");
+    setFormData({ recipient: "", fullName: "", amount: "", reason: "" });
   };
 
   return (

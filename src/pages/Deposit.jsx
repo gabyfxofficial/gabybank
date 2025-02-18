@@ -1,11 +1,89 @@
-import React, { useState } from "react";
+// Deposit.jsx
+import React, { useState, useContext } from "react";
+import { useDispatch } from "react-redux";
+import {
+  depositFiat,
+  depositBtc,
+  depositEth,
+  addTransaction,
+} from "../redux/store"; // Am importat și addTransaction
+import {
+  FaCreditCard,
+  FaUniversity,
+  FaPaypal,
+  FaBitcoin,
+  FaMobileAlt,
+} from "react-icons/fa";
+import { AuthContext } from "../contexts/AuthContext"; // Importăm contextul
 import "../styles/deposit.css";
 
 function Deposit() {
-  const [activeTab, setActiveTab] = useState("credit");
+  const { userData } = useContext(AuthContext);
+  const [activeMethod, setActiveMethod] = useState("credit");
+  const [depositAmount, setDepositAmount] = useState("");
+  const [cryptoType, setCryptoType] = useState("bitcoin"); // Tipul de criptomonedă selectat
+  const dispatch = useDispatch();
+
+  const depositMethods = [
+    { id: "credit", label: "Credit Card", icon: <FaCreditCard size={32} /> },
+    { id: "bank", label: "Bank Transfer", icon: <FaUniversity size={32} /> },
+    { id: "paypal", label: "PayPal", icon: <FaPaypal size={32} /> },
+    { id: "crypto", label: "Crypto", icon: <FaBitcoin size={32} /> },
+    { id: "wallet", label: "Mobile Wallet", icon: <FaMobileAlt size={32} /> },
+  ];
+
+  const handleMethodChange = (event) => {
+    setActiveMethod(event.target.value);
+  };
+
+  const handleDeposit = (e) => {
+    e.preventDefault();
+    const amount = parseFloat(depositAmount);
+    if (isNaN(amount) || amount <= 0) {
+      alert("Please enter a valid amount");
+      return;
+    }
+    // Obținem data curentă
+    const currentDate = new Date().toLocaleDateString();
+    let methodDescription = "";
+
+    if (activeMethod === "crypto") {
+      if (cryptoType === "bitcoin") {
+        dispatch(depositBtc(amount));
+        methodDescription = "Crypto - Bitcoin";
+        alert(`Successfully deposited ${amount.toFixed(8)} BTC`);
+      } else if (cryptoType === "ethereum") {
+        dispatch(depositEth(amount));
+        methodDescription = "Crypto - Ethereum";
+        alert(`Successfully deposited ${amount.toFixed(8)} ETH`);
+      }
+    } else {
+      dispatch(depositFiat(amount));
+      // Obținem descrierea metodei din depositMethods
+      const methodObj = depositMethods.find((m) => m.id === activeMethod);
+      methodDescription = methodObj ? methodObj.label : activeMethod;
+      alert(
+        `Successfully deposited ${amount.toFixed(2)} ${
+          userData?.bank?.currency || "USD"
+        }`
+      );
+    }
+
+    // Adăugăm tranzacția în store
+    dispatch(
+      addTransaction({
+        id: Date.now(),
+        type: "Deposit",
+        amount,
+        date: currentDate,
+        method: methodDescription,
+      })
+    );
+    setDepositAmount("");
+  };
 
   const renderCreditForm = () => (
-    <form className="deposit-form">
+    <form className="deposit-form" onSubmit={handleDeposit}>
       <h3 className="deposit-form-title">Deposit with Credit Card</h3>
       <div className="form-group">
         <label className="form-label">Card Number</label>
@@ -24,11 +102,15 @@ function Deposit() {
         <input className="form-input" type="text" placeholder="Enter CVV" />
       </div>
       <div className="form-group">
-        <label className="form-label">Amount</label>
+        <label className="form-label">
+          Amount ({userData?.bank?.currency || "USD"})
+        </label>
         <input
           className="form-input"
           type="number"
           placeholder="Enter amount"
+          value={depositAmount}
+          onChange={(e) => setDepositAmount(e.target.value)}
         />
       </div>
       <button type="submit" className="deposit-button">
@@ -38,7 +120,7 @@ function Deposit() {
   );
 
   const renderBankForm = () => (
-    <form className="deposit-form">
+    <form className="deposit-form" onSubmit={handleDeposit}>
       <h3 className="deposit-form-title">Deposit via Bank Transfer</h3>
       <div className="form-group">
         <label className="form-label">Bank Name</label>
@@ -65,11 +147,15 @@ function Deposit() {
         />
       </div>
       <div className="form-group">
-        <label className="form-label">Amount</label>
+        <label className="form-label">
+          Amount ({userData?.bank?.currency || "USD"})
+        </label>
         <input
           className="form-input"
           type="number"
           placeholder="Enter amount"
+          value={depositAmount}
+          onChange={(e) => setDepositAmount(e.target.value)}
         />
       </div>
       <button type="submit" className="deposit-button">
@@ -79,7 +165,7 @@ function Deposit() {
   );
 
   const renderPaypalForm = () => (
-    <form className="deposit-form">
+    <form className="deposit-form" onSubmit={handleDeposit}>
       <h3 className="deposit-form-title">Deposit via PayPal</h3>
       <div className="form-group">
         <label className="form-label">PayPal Email</label>
@@ -90,11 +176,15 @@ function Deposit() {
         />
       </div>
       <div className="form-group">
-        <label className="form-label">Amount</label>
+        <label className="form-label">
+          Amount ({userData?.bank?.currency || "USD"})
+        </label>
         <input
           className="form-input"
           type="number"
           placeholder="Enter amount"
+          value={depositAmount}
+          onChange={(e) => setDepositAmount(e.target.value)}
         />
       </div>
       <button type="submit" className="deposit-button">
@@ -104,24 +194,29 @@ function Deposit() {
   );
 
   const renderCryptoForm = () => (
-    <form className="deposit-form">
+    <form className="deposit-form" onSubmit={handleDeposit}>
       <h3 className="deposit-form-title">Deposit via Cryptocurrency</h3>
       <div className="form-group">
         <label className="form-label">Select Cryptocurrency</label>
-        <select className="form-input">
+        <select
+          className="form-input"
+          value={cryptoType}
+          onChange={(e) => setCryptoType(e.target.value)}
+        >
           <option value="bitcoin">Bitcoin (BTC)</option>
           <option value="ethereum">Ethereum (ETH)</option>
-          <option value="litecoin">Litecoin (LTC)</option>
-          <option value="usdt">Tether (USDT)</option>
-          <option value="usdc">USD Coin (USDC)</option>
         </select>
       </div>
       <div className="form-group">
-        <label className="form-label">Amount (USD)</label>
+        <label className="form-label">
+          Amount ({userData?.bank?.currency || "USD"})
+        </label>
         <input
           className="form-input"
           type="number"
-          placeholder="Enter amount in USD"
+          placeholder="Enter amount"
+          value={depositAmount}
+          onChange={(e) => setDepositAmount(e.target.value)}
         />
       </div>
       <button type="submit" className="deposit-button">
@@ -131,7 +226,7 @@ function Deposit() {
   );
 
   const renderWalletForm = () => (
-    <form className="deposit-form">
+    <form className="deposit-form" onSubmit={handleDeposit}>
       <h3 className="deposit-form-title">Deposit via Mobile Wallet</h3>
       <div className="form-group">
         <label className="form-label">Wallet Provider</label>
@@ -141,11 +236,15 @@ function Deposit() {
         </select>
       </div>
       <div className="form-group">
-        <label className="form-label">Amount</label>
+        <label className="form-label">
+          Amount ({userData?.bank?.currency || "USD"})
+        </label>
         <input
           className="form-input"
           type="number"
           placeholder="Enter amount"
+          value={depositAmount}
+          onChange={(e) => setDepositAmount(e.target.value)}
         />
       </div>
       <button type="submit" className="deposit-button">
@@ -155,7 +254,7 @@ function Deposit() {
   );
 
   const renderForm = () => {
-    switch (activeTab) {
+    switch (activeMethod) {
       case "credit":
         return renderCreditForm();
       case "bank":
@@ -174,38 +273,19 @@ function Deposit() {
   return (
     <section className="deposit-container">
       <h2 className="deposit-heading">Deposit Funds</h2>
-      <nav className="tab-buttons">
-        <button
-          className={`tab-button ${activeTab === "credit" ? "active" : ""}`}
-          onClick={() => setActiveTab("credit")}
+      <div className="dropdown-container">
+        <select
+          className="method-dropdown"
+          value={activeMethod}
+          onChange={handleMethodChange}
         >
-          Credit Card
-        </button>
-        <button
-          className={`tab-button ${activeTab === "bank" ? "active" : ""}`}
-          onClick={() => setActiveTab("bank")}
-        >
-          Bank Transfer
-        </button>
-        <button
-          className={`tab-button ${activeTab === "paypal" ? "active" : ""}`}
-          onClick={() => setActiveTab("paypal")}
-        >
-          PayPal
-        </button>
-        <button
-          className={`tab-button ${activeTab === "crypto" ? "active" : ""}`}
-          onClick={() => setActiveTab("crypto")}
-        >
-          Crypto
-        </button>
-        <button
-          className={`tab-button ${activeTab === "wallet" ? "active" : ""}`}
-          onClick={() => setActiveTab("wallet")}
-        >
-          Mobile Wallet
-        </button>
-      </nav>
+          {depositMethods.map((method) => (
+            <option key={method.id} value={method.id}>
+              {method.label}
+            </option>
+          ))}
+        </select>
+      </div>
       <section className="form-content">{renderForm()}</section>
     </section>
   );

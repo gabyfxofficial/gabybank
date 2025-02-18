@@ -42,6 +42,7 @@ function Login() {
           country: user.address?.country || "N/A",
           city: user.address?.city || "N/A",
           birthDate: user.birthDate,
+          bank: user.bank, // Se preia obiectul bank (inclusiv IBAN, currency etc.)
         };
         login("mockToken123", userData, trimmedUsername);
         navigate("/home");

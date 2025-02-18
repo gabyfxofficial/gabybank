@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import {
-  HashRouter as Router, // folosim HashRouter pentru GitHub Pages
+  HashRouter as Router,
   Routes,
   Route,
   Navigate,
@@ -19,6 +19,8 @@ import Updates from "./pages/Updates";
 import HelpSupport from "./pages/HelpSupport";
 import { AuthProvider, AuthContext } from "./contexts/AuthContext";
 import "./styles/global.css";
+import { Provider } from "react-redux";
+import { store } from "./redux/store";
 
 function Layout({ children }) {
   const { isLoggedIn } = useContext(AuthContext);
@@ -157,18 +159,19 @@ function AppRoutes() {
           )
         }
       />
-      {/* Ruta pentru Account Statement a fost eliminată */}
     </Routes>
   );
 }
 
 function App() {
   return (
-    <AuthProvider>
-      <Router>
-        <AppRoutes />
-      </Router>
-    </AuthProvider>
+    <Provider store={store}>
+      <AuthProvider>
+        <Router>
+          <AppRoutes />
+        </Router>
+      </AuthProvider>
+    </Provider>
   );
 }
 
