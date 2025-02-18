@@ -1,4 +1,3 @@
-// Home.jsx
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
@@ -16,13 +15,8 @@ function Home() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  // Filtrăm tranzacțiile pentru a afișa doar Transfer și Deposit
   const filteredTransactions = transactions.filter(
     (tx) => tx.type === "Transfer" || tx.type === "Deposit"
-  );
-  const totalTransactionsAmount = filteredTransactions.reduce(
-    (sum, tx) => sum + tx.amount,
-    0
   );
 
   const formatBalance = (balance) =>
@@ -30,7 +24,6 @@ function Home() {
 
   return (
     <div className="home-container">
-      {/* Account Overview Section */}
       <div className="overview-section">
         <div className="overview-card">
           <h2 className="overview-title">Account Overview</h2>
@@ -68,7 +61,6 @@ function Home() {
 
       <div className="separator"></div>
 
-      {/* Transactions Section */}
       <div className="transactions-section">
         <h2 className="transactions-title">My Transactions</h2>
         {filteredTransactions.length > 0 ? (
@@ -97,10 +89,6 @@ function Home() {
         ) : (
           <p className="no-transactions">No transactions available.</p>
         )}
-        <div className="transactions-total">
-          Total Amount: {totalTransactionsAmount.toFixed(2)}{" "}
-          {userData?.bank?.currency || "$"}
-        </div>
       </div>
     </div>
   );
